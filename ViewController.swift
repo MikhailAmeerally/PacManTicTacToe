@@ -135,7 +135,7 @@ class ViewController: UIViewController {
             
             alert_game_over.addAction(UIAlertAction(title: "New Game", style: UIAlertActionStyle.default, handler: newGame))
             
-            alert_game_over.addAction(UIAlertAction(title: "Quit", style: UIAlertActionStyle.default, handler: nil))
+            alert_game_over.addAction(UIAlertAction(title: "Quit", style: UIAlertActionStyle.default, handler: quitGame))
             
             
             self.present(alert_game_over, animated: true, completion: nil)
@@ -163,7 +163,7 @@ class ViewController: UIViewController {
             
             alert_game_over.addAction(UIAlertAction(title: "New Game", style: UIAlertActionStyle.default, handler: newGame))
             
-            alert_game_over.addAction(UIAlertAction(title: "Quit", style: UIAlertActionStyle.default, handler: nil))
+            alert_game_over.addAction(UIAlertAction(title: "Quit", style: UIAlertActionStyle.default, handler: quitGame))
             
             self.present(alert_game_over, animated: true, completion: nil)
         
@@ -193,6 +193,28 @@ class ViewController: UIViewController {
         }
         player1Turn = true;
         gameState = [0,0,0,0,0,0,0,0,0]
+    }
+    
+    func quitGame(alert: UIAlertAction) -> Void
+    {
+        for view in self.view.subviews
+        {
+            if let btn = view as? UIButton
+            {
+                btn.isUserInteractionEnabled = true;
+                btn.setImage(nil, for: UIControlState())
+            }
+        }
+        player1Turn = true;
+        gameState = [0,0,0,0,0,0,0,0,0]
+        
+        ghostScoreInt = 0
+        pacmanScoreInt = 0
+        pacmanScore.text = String(pacmanScoreInt)
+        GhostScore.text = String(ghostScoreInt)
+        
+        performSegue(withIdentifier: "Main", sender: self)
+        
     }
     
     
