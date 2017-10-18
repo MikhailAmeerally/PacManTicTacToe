@@ -63,6 +63,12 @@ class ViewController: UIViewController {
         
         // Check Draw
         
+        if(drawGame())
+        {
+            gameOver(winner: 0)
+        }
+        
+        
     }
 
     override func viewDidLoad() {
@@ -154,7 +160,7 @@ class ViewController: UIViewController {
             }
         
         }
-        else
+        else if (winner == 2)
         {
             ghostScoreInt += 1
             GhostScore.text = String(ghostScoreInt)
@@ -175,6 +181,17 @@ class ViewController: UIViewController {
                 }
             }
         
+        }
+        
+        else
+        {
+            let alert_game_draw: UIAlertController = UIAlertController(title: "Draw Game", message:
+                "Game is a Draw", preferredStyle: UIAlertControllerStyle.alert)
+            alert_game_draw.addAction(UIAlertAction(title: "New Game", style: UIAlertActionStyle.default, handler: newGame))
+            alert_game_draw.addAction(UIAlertAction(title: "Quit", style: UIAlertActionStyle.default, handler: quitGame))
+            self.present(alert_game_draw, animated: true, completion: nil)
+            
+            
         }
         
         
@@ -216,6 +233,19 @@ class ViewController: UIViewController {
         performSegue(withIdentifier: "Main", sender: self)
         
     }
+    
+    func drawGame() -> Bool
+    {
+        for i in gameState
+        {
+            if (i == 0)
+            {
+                return false
+            }
+        }
+        return true
+    }
+    
     
     
 
